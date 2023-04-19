@@ -19,48 +19,9 @@ public class CotizacionDolarService
     public CotizacionDolarService(ICotizacionDolar repository)
     {
         _repository = repository;
-        _timer = new Timer(async _ => await addCotizacion(), null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+        _timer = new Timer(async _ => await addCotizacion(), null, TimeSpan.Zero, TimeSpan.FromMinutes(15));
     }
 
-    // public async Task addCotizacion()
-    // {
-    //     var result = new CotizacionesBna();
-    //     try
-    //     {
-    //         using (var context = new ErreparContext())
-    //         {
-    //             // Descargar la página de cotizaciones del Banco Nación Argentina
-    //             var url = "https://www.bna.com.ar/Personas";
-    //             var web = new HtmlWeb();
-    //             var doc = await web.LoadFromWebAsync(url);
-
-    //             // Obtener la cotización del billete
-    //             var billeteCompra = doc.DocumentNode.SelectSingleNode("//div[@id='billetes']//table[@class='table cotizacion']//tr[1]//td[2]")?.InnerText;
-    //             var billeteVenta = doc.DocumentNode.SelectSingleNode("//div[@id='billetes']//table[@class='table cotizacion']//tr[1]//td[3]")?.InnerText;
-
-    //             // Obtener la cotización de divisas del dolar
-    //             var divisaCompra = doc.DocumentNode.SelectSingleNode("//div[@id='divisas']//table[@class='table cotizacion']//tr[1]//td[2]")?.InnerText;
-    //             var divisaVenta = doc.DocumentNode.SelectSingleNode("//div[@id='divisas']//table[@class='table cotizacion']//tr[1]//td[3]")?.InnerText;
-
-
-    //             // Convertir las cotizaciones a decimal y guardar en el objeto result
-    //             result.CotizacionesId = Guid.NewGuid();
-    //             result.Fecha = DateTime.Now;
-    //             result.BilleteCompra = decimal.TryParse(billeteCompra, out decimal billeteCompraDecimal) ? (billeteCompraDecimal / 10000m).ToString("0.0000", CultureInfo.GetCultureInfo("en-US")) : null;
-    //             result.BilleteVenta = decimal.TryParse(billeteVenta, out decimal billeteVentaDecimal) ? (billeteVentaDecimal / 10000m).ToString("0.0000", CultureInfo.GetCultureInfo("en-US")) : null;
-    //             result.DivisaCompra = decimal.TryParse(divisaCompra, out decimal divisaCompraDecimal) ? divisaCompraDecimal.ToString("0.0000", CultureInfo.GetCultureInfo("en-US")) : null;
-    //             result.DivisaVenta = decimal.TryParse(divisaVenta, out decimal divisaVentaDecimal) ? divisaVentaDecimal.ToString("0.0000", CultureInfo.GetCultureInfo("en-US")) : null;
-
-    //             // Guardar el objeto result en la base de datos
-    //             await context.CotizacionesBnas.AddAsync(result);
-    //             await context.SaveChangesAsync();
-    //         }
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         throw new Exception("Ha ocurrido un problema guardando la cotizacion actual. ", ex);
-    //     }
-    // }
     public async Task addCotizacion()
     {
         var result = new CotizacionesBna();
